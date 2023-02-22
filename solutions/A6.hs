@@ -3,26 +3,37 @@ module A6 where
 import Provided
 
 import Data.List ( intersperse, sort )
+import Data.Char (isLetter)
 
 -- *** A6-0: WARM-UP *** --
 
 -- Q#01
+type Chances = Int
+type Guess = String
+type Move = Char
+type Secret = String
+type Dictionary = [String]
+
 
 
 -- Q#02
-data GameException
+data GameException = InvalidWord | InvalidMove | RepeatMove | GameOver
 
 -- Q#03
 
-lengthInRange = undefined
+lengthInRange :: Secret -> Bool
+lengthInRange sc =  length sc > a && length sc < b
+                    where (a,b) = _LENGTH_
 
 -- Q#04
 
-invalidMove = undefined
+invalidMove :: Move -> Bool
+invalidMove move = isLetter move
 
 -- Q#05
 
-revealLetters = undefined
+revealLetters :: Move -> Secret -> Guess -> Guess
+revealLetters 
 
 -- Q#06
 
