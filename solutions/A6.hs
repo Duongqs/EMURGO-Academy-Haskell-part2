@@ -33,15 +33,26 @@ invalidMove move = isLetter move
 -- Q#05
 
 revealLetters :: Move -> Secret -> Guess -> Guess
-revealLetters 
+revealLetters m sc g = zipWith (\x y -> if invalidMove m && m ==x then x else y ) sc g 
 
 -- Q#06
 
-updateChances = undefined
+updateChances :: Move -> Secret -> Chances-> Chances
+updateChances m sc c = if invalidMove m && elem m sc 
+                          then c 
+                          else c-1
 
 -- Q#07
 
-setSecret = undefined
+setSecret :: IO Secret
+setSecret = do
+  putStr "Enter a secret word:\t"
+  showInput False
+  sc <- getLine
+  showInput True
+  _SPACE_
+  return sc
+
 
 
 -- *** A6-1: Records & Instances *** --
