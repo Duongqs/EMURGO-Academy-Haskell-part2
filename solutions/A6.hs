@@ -88,7 +88,7 @@ updateGame m g = Game {getCurrentGuess = revealLetters m sc cg
                       ,getListMove = m : lm
                       ,getChances = updateChances m sc ch }
           where sc = getSecret g
-                cg = getCurrentGuess g  
+                cg = getCurrentGuess g
                 ch = getChances g
                 lm = getListMove g
 
@@ -109,7 +109,7 @@ instance Show Game where
 -- Q#13
 instance Show GameException where
   show InvalidWord = show (concat ["invalid input"," with lower bound: ",lb," and higher bound: ",ub])
-    where  
+    where
       lb = show $ fst _LENGTH_
       ub = show $ snd _LENGTH_
   show InvalidMove = show "invalid Move"
@@ -121,15 +121,21 @@ instance Show GameException where
 
 -- Q#14
 
-toMaybe = undefined
+toMaybe :: Bool -> a -> Maybe a
+-- toMaybe b a
+--   | not b   = Nothing
+--   | otherwise = Just a
+toMaybe b a = if b then Just a else Nothing
 
 -- Q#15
 
-validateSecret = undefined
+validateSecret :: (Secret -> Bool) -> Secret -> GameException -> Either GameException Secret
+validateSecret f sc ge = if f sc then Right sc 
+                        else Left InvalidWord
 
 -- Q#16
 
-hasValidChars = undefined
+hasValidChars = validateSecret (\sc -> foldr (\s b -> isLetter s && b) True sc) 
 
 
 isValidLength = undefined
