@@ -5,6 +5,8 @@ import Provided
 
 import Data.List ( intersperse, sort )
 import Data.Char (isLetter, toUpper)
+import Control.Monad.State
+
 
 -- *** A6-0: WARM-UP *** --
 
@@ -129,13 +131,13 @@ toMaybe b a = if b then Just a else Nothing
 
 -- Q#15
 
-validateSecret :: (Secret -> Bool) -> Secret -> GameException -> Either GameException Secret
-validateSecret f sc ge = if f sc then Right sc 
+validateSecret :: (Secret -> Bool) -> Secret -> Either GameException Secret
+validateSecret f sc  = if f sc then Right sc 
                         else Left InvalidWord
 
 -- Q#16
 
-hasValidChars = validateSecret (\sc -> foldr (\s b -> isLetter s && b) True sc) 
+-- hasValidChars sc = validateSecret (\sc -> foldr (\s b -> isLetter s && b) True sc) 
 
 
 isValidLength = undefined
@@ -152,3 +154,4 @@ validateWithDict = undefined
 -- Q#18
 
 processTurn = undefined
+
